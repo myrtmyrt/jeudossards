@@ -1,45 +1,22 @@
-import {useState, useEffect} from 'react'
-import {QrReader} from 'react-qr-reader';
-import {toast} from "react-toastify";
-import {ToastContainer} from 'react-toastify';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
+import QrReaderPage from "./QrReaderPage.jsx";
+import Login from "./Login.jsx";
+import {ToastContainer} from "react-toastify";
+import AccountTypeRouter from "./AccountTypeRouter.jsx";
+import Admin from "./Admin.jsx";
 
-import 'react-toastify/dist/ReactToastify.css';
-
-function App() {
-    const [data, setData] = useState('');
-
-    const addPoints = (n) => new Promise((resolve, reject) => {
-        setTimeout(() => {
-            Math.random() > 0.5 ? resolve() : reject()
-        }, 3000)
-    })
-
-    useEffect(() => {
-        if (!data) return
-        toast.promise(addPoints(30), {
-            pending: 'Adding Points to user ' + data,
-            success: `${30} points added to user ${data}`,
-            error: `could not add points to user ${data}`
-        })
-    }, [data])
-
-    return (
-        <div className="flex flex-col items-center justify-center w-screen">
+// get the base name from vite confifg
+function App(){
+    return(
+        <Router basename={import.meta.env.VITE_BASE_URL}>
             <ToastContainer/>
-            <QrReader
-                onResult={(result, error) => {
-                    if (!!result) {
-                        setData(result?.text);
-                    }
-
-                    if (!!error) {
-                        console.info(error);
-                    }
-                }}
-                containerStyle={{width: "50vw"}}
-            />
-        </div>
+            <Routes>
+                <Route path="/" element={<AccountTypeRouter><QrReaderPage/></AccountTypeRouter>}/>
+                <Route path="/login" element={<AccountTypeRouter><Login/></AccountTypeRouter>}/>
+                <Route path="/admin" element={<AccountTypeRouter><Admin/></AccountTypeRouter>}/>
+            </Routes>
+        </Router>
     )
 }
-
-export default App
+export default App;
