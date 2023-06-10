@@ -37,7 +37,7 @@ function Login() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center w-screen h-screen bg-red-900">
+        <div className="flex flex-col items-center justify-center w-screen h-screen">
             <img src={background} className="absolute top-0 left-0 w-full h-full object-cover" alt=""/>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center gap-5 bg-[#FFFFFFAA] backdrop-blur-sm p-10 rounded-2xl w-64 h-56">
                 <input type="email" placeholder="email" {...register("email", {required: true})} className="border-b border-b-green-900 text-black p-1 focus:outline-0 focus:border-2 transition-all"/>

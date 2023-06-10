@@ -12,7 +12,8 @@ function App(){
         <Router basename={import.meta.env.VITE_BASE_URL}>
             <ToastContainer/>
             <Routes>
-                <Route path="/" element={<AccountTypeRouter><QrReaderPage/></AccountTypeRouter>}/>
+                <Route path="/" element={<AccountTypeRouter></AccountTypeRouter>}/>
+                <Route path="/qr" element={<AccountTypeRouter><QrReaderPage/></AccountTypeRouter>}/>
                 <Route path="/login" element={<AccountTypeRouter><Login/></AccountTypeRouter>}/>
                 <Route path="/admin" element={<AccountTypeRouter><Admin/></AccountTypeRouter>}/>
             </Routes>

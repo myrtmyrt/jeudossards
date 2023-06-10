@@ -71,6 +71,7 @@ function QrReaderPage() {
                 containerStyle={{width: "100vw", height: "100vh", position: "fixed", top: 0, left: 0}}
                 videoStyle={{objectFit: "cover", width: "100%", height: "100%", objectPosition: "center"}}
                 videoContainerStyle={{position: ""}}
+                constraints={{facingMode: "environment"}}
             />
             <button onClick={() => {
                 setButtonLoading(true)
