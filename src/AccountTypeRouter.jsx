@@ -14,8 +14,9 @@ function redirectUser(user, navigate) {
     const q = query(collection(db, 'settings'), where('email', '==', user.email))
     getDocs(q).then((snapshot) => {
         if (snapshot.empty) {
-            navigate('/login')
-            return
+            auth.signOut().then(()=> {
+                navigate('/login')
+            })
         }
 
         const settings = snapshot.docs[0].data()
@@ -30,9 +31,9 @@ function redirectUser(user, navigate) {
 function AccountTypeRouter({children}) {
     const navigate = useNavigate();
 
-    redirectUser(auth.currentUser, navigate);
 
-    useEffect(()=>{
+    useEffect(()=> {
+        redirectUser(auth.currentUser, navigate);
         onAuthStateChanged(auth, (user) => {
             redirectUser(user, navigate)
         });
